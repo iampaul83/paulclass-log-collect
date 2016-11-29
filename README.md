@@ -32,9 +32,12 @@ curl -H "Content-Type: application/json" -X POST -d '{"iam":"paul83"QQ}' http://
 
 # log file
 
-- log/student
-- log/teacher
+每天各一個檔案
+
+- log/student.YYYYMMDD
+- log/teacher.YYYYMMDD
 
 # @TODO
 
-- create a new log file every day
+- ~create a new log file every day~
+- test __create a new log file every day__

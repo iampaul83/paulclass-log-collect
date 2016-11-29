@@ -1,6 +1,12 @@
 var fs = require('fs');
 var path = require('path');
+var moment = require('moment');
 var v = require('./values')
+var schedule = require('node-schedule');
+
+// daily
+var j = schedule.scheduleJob('0 0 * * *', createWriteStreams);
+
 /*
 v.LOG_PATH
 v.LOG_FILENAME_STUDENT
@@ -11,8 +17,10 @@ if (!fs.existsSync(v.LOG_PATH)){
   fs.mkdirSync(v.LOG_PATH);
 }
 
-var studentWS = fs.createWriteStream(path.join(v.LOG_PATH, v.LOG_FILENAME_STUDENT), {flags: 'a'});
-var teacherWS = fs.createWriteStream(path.join(v.LOG_PATH, v.LOG_FILENAME_TEACHER), {flags: 'a'});
+var studentWS;
+var teacherWS;
+
+createWriteStreams();
 
 studentWS.on('error', errorHandler);
 teacherWS.on('error', errorHandler);
@@ -32,6 +40,16 @@ function write(type, jsonString) {
   else {
     console.log(`unknown log type: ${type}`);
   }
+}
+
+function todayString() {
+  return moment().format('YYYYMMDD');
+}
+
+function createWriteStreams() {
+  var today = todayString();
+  studentWS = fs.createWriteStream(path.join(v.LOG_PATH, `${v.LOG_FILENAME_STUDENT}.${today}`), {flags: 'a'});
+  teacherWS = fs.createWriteStream(path.join(v.LOG_PATH, `${v.LOG_FILENAME_TEACHER}.${today}`), {flags: 'a'});
 }
 
 module.exports = {
