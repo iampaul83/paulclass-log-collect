@@ -52,8 +52,10 @@ function createWriteStreams() {
   var oldTeacherWS = teacherWS;
   studentWS = fs.createWriteStream(path.join(v.LOG_PATH, `${v.LOG_FILENAME_STUDENT}.${today}`), {flags: 'a'});
   teacherWS = fs.createWriteStream(path.join(v.LOG_PATH, `${v.LOG_FILENAME_TEACHER}.${today}`), {flags: 'a'});
-  oldStudentWS.end();
-  oldTeacherWS.end();
+  if (oldStudentWS && oldTeacherWS) {
+    oldStudentWS.end();
+    oldTeacherWS.end();
+  }
 }
 
 module.exports = {
