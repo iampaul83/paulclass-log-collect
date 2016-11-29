@@ -27,7 +27,7 @@ curl -X POST -d '{"iam":"paul83"}' http://localhost:3000/student
 curl -H "Content-Type: application/json" -X GET -d '{"iam":"paul83"}' http://localhost:3000/student
 
 // bad json
-curl -H "Content-Type: application/json" -X GET -d '{"iam":"paul83"QQ}' http://localhost:3000/student
+curl -H "Content-Type: application/json" -X POST -d '{"iam":"paul83"QQ}' http://localhost:3000/student
 ```
 
 # log file
