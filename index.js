@@ -47,6 +47,8 @@ function requestHandler(type, req, res, next) {
     err.status = 400;
     next(err);
   }
-  logger.write(type, JSON.stringify(req.body));
-  res.json({status: 200});
+  else {
+    logger.write(type, JSON.stringify(req.body));
+    res.json({status: 200});
+  }
 }
