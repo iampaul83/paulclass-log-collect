@@ -7,6 +7,10 @@ v.LOG_FILENAME_STUDENT
 v.LOG_FILENAME_TEACHER
 */
 
+if (!fs.existsSync(v.LOG_PATH)){
+  fs.mkdirSync(v.LOG_PATH);
+}
+
 var studentWS = fs.createWriteStream(path.join(v.LOG_PATH, v.LOG_FILENAME_STUDENT), {flags: 'a'});
 var teacherWS = fs.createWriteStream(path.join(v.LOG_PATH, v.LOG_FILENAME_TEACHER), {flags: 'a'});
 
